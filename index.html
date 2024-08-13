@@ -225,16 +225,22 @@
             </div>
         </div>
         <audio id="audioPlayer"></audio>
+
+        <!-- Ad Script -->
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '3614623b197d7614972bac5b90dfde8c',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.topcreativeformat.com/3614623b197d7614972bac5b90dfde8c/invoke.js"></script>
     </div>
 
     <!-- Import listlagu.js -->
     <script src="listlagu.js"></script>
-
-    <!-- First Advertisement Script -->
-    <script type='text/javascript' src='//pl24027564.highratecpm.com/e3/d5/ea/e3d5eab2aafe13ced2f244ef1190f1ae.js'></script>
-
-    <!-- Second Advertisement Script -->
-    <script type='text/javascript' src='//pl24027714.highratecpm.com/b4/41/d4/b441d4aefdab5f2f3f3b7b39130aae8d.js'></script>
 
     <script>
         const audioPlayer = document.getElementById('audioPlayer');
@@ -282,7 +288,7 @@
             albumCoverElement.src = song.image;
             audioPlayer.load();
             playMusic();
-            localStorage.setItem('currentTrackIndex', index); // Save current track index
+            localStorage.setItem('currentTrackIndex', index);
         }
 
         function togglePlayPause() {
