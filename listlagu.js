@@ -10,93 +10,93 @@ const songs = [
         image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
     },
     {
-        title: "Bertaut- Nadin Amizah",
+        title: "Bertaut - Nadin Amizah",
         file: "/audio/Bertaut-Nadin-Amizah.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/fca62ea24c5ad5288044f.jpg"
     },
     {
         title: "Ghea Indrawari - Jiwa Yang Bersedih",
-        file: "/audio/Ghea Indrawari-Jiwa-Yang-Bersedih.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        file: "/audio/Ghea-Indrawari-Jiwa-Yang-Bersedih.mp3",
+        image: "https://telegra.ph/file/aa78c364673eceb44c0ff.jpg"
     },
     {
-        title: "Bohongi hati - mahalini",
+        title: "Bohongi hati - Mahalini",
         file: "/audio/Bohongi-hati-mahalini.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/49a515c7390c3260472e3.jpg"
     },
     {
-        title: "DUKA - last chilid",
+        title: "DUKA - Last Child",
         file: "/audio/DUKA-last-chilid.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/aba254cf76a49fae21407.jpg"
     },
     {
         title: "INDAH - TAK SEMPURNA",
         file: "/audio/INDAH-TAK-SEMPURNA.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/097c89f80f74b47dad392.jpg"
     },
     {
         title: "Mendua - Astrid",
         file: "/audio/Mendua-Astrid.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/a10370b50e724643008f9.jpg"
     },
     {
-        title: "Sekuat Hatimu - LastChild",
+        title: "Sekuat Hatimu - Last Child",
         file: "/audio/Sekuat-Hatimu-Last-Child.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/550ef2f05c4eed994beb4.jpg"
     },
     {
         title: "Wizz Baker - Rindu Rumah",
         file: "/audio/Wizz-Baker-Rindu-Rumah.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/cf2463b5e83f3f28dcb12.jpg"
     },
     {
-        title: "Mahalini - bawadia kembali",
+        title: "Mahalini - Bawadia Kembali",
         file: "/audio/Mahalini-bawadia-kembali.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/670e8d7d77f603efb78cf.jpg"
     },
     {
         title: "AJARKAN AKU - ARVIAN DWI",
         file: "/audio/AJARKAN-AKU-ARVIAN-DWI.mp3",
-        image: ""
+        image: "https://telegra.ph/file/f548f9a33579d4dc210a5.jpg"
     },
     {
         title: "Takut - Idgitaf",
         file: "/audio/Takut-Idgitaf.mp3",
-        image: ""
+        image: "https://telegra.ph/file/c103bf36302371de2963d.jpg"
     },
     {
         title: "ANDMESH - HANYA RINDU",
         file: "/audio/ANDMESH-HANYA-RINDU.mp3",
-        image: ""
+        image: "https://telegra.ph/file/7c56a77256acd3f8a8ae2.jpg"
     },
     {
         title: "TAK KAN HILANG - Budi Doremi",
         file: "/audio/TAK-KAN-HILANG-Budi-Doremi.mp3",
-        image: ""
+        image: "https://telegra.ph/file/1aa0cf150ae3c664dd1bd.jpg"
     },
     {
         title: "TULUS - Nala",
         file: "/audio/TULUS-Nala.mp3",
-        image: ""
+        image: "https://telegra.ph/file/25d0c4c6687728c0fb225.jpg"
     },
     {
         title: "Dudy Oris - Aku Yang Jatuh Cinta",
         file: "/audio/Dudy-Oris-Aku-Yang-Jatuh-Cinta.mp3",
-        image: ""
+        image: "https://telegra.ph/file/4bd164cf8c040c4a4becc.jpg"
     },
     {
-      title: "Lyodra - tak Dianggap",
+        title: "Lyodra - Tak Dianggap",
         file: "/audio/Lyodra-tak-Dianggap.mp3",
-        image: ""
+        image: "https://telegra.ph/file/cac8e3202f6427b5d8e97.jpg"
     },
-    {  
-       title: "Ku Ingin Pisah - Nabila Taqiyyah",
+    {
+        title: "Ku Ingin Pisah - Nabila Taqiyyah",
         file: "/audio/Ku-Ingin-Pisah-Nabila-Taqiyyah.mp3",
-        image: ""
+        image: "https://telegra.ph/file/cdc3e5c8b924d57a36060.jpg"
     },
-    {   
-     title: "Ziva - Cukup",
+    {
+        title: "Ziva - Cukup",
         file: "/audio/Ziva-Magnolya-Cukup.mp3",
-        image: "https://telegra.ph/file/a609844fd6f3ab99ac4ef.jpg"
+        image: "https://telegra.ph/file/097c89f80f74b47dad392.jpg"
     }
 ];
