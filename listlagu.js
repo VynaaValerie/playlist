@@ -20,7 +20,7 @@ const songs = [
         image: "https://telegra.ph/file/aa78c364673eceb44c0ff.jpg"
     },
     {
-        title: "Bohongi hati - Mahalini",
+        title: "Bohongi Hati - Mahalini",
         file: "/audio/Bohongi-hati-mahalini.mp3",
         image: "https://telegra.ph/file/49a515c7390c3260472e3.jpg"
     },
@@ -30,7 +30,7 @@ const songs = [
         image: "https://telegra.ph/file/aba254cf76a49fae21407.jpg"
     },
     {
-        title: "INDAH - TAK SEMPURNA",
+        title: "Indah - Tak Sempurna",
         file: "/audio/INDAH-TAK-SEMPURNA.mp3",
         image: "https://telegra.ph/file/097c89f80f74b47dad392.jpg"
     },
@@ -45,17 +45,17 @@ const songs = [
         image: "https://telegra.ph/file/550ef2f05c4eed994beb4.jpg"
     },
     {
-        title: "Wizz Baker - Rindu Rumah",
+        title: "Rindu Rumah - Wizz Baker",
         file: "/audio/Wizz-Baker-Rindu-Rumah.mp3",
         image: "https://telegra.ph/file/cf2463b5e83f3f28dcb12.jpg"
     },
     {
-        title: "Mahalini - Bawadia Kembali",
+        title: "Bawadia Kembali - Mahalini",
         file: "/audio/Mahalini-bawadia-kembali.mp3",
         image: "https://telegra.ph/file/670e8d7d77f603efb78cf.jpg"
     },
     {
-        title: "AJARKAN AKU - ARVIAN DWI",
+        title: "Ajarkan Aku - Arvian Dwi",
         file: "/audio/AJARKAN-AKU-ARVIAN-DWI.mp3",
         image: "https://telegra.ph/file/f548f9a33579d4dc210a5.jpg"
     },
@@ -65,27 +65,27 @@ const songs = [
         image: "https://telegra.ph/file/c103bf36302371de2963d.jpg"
     },
     {
-        title: "ANDMESH - HANYA RINDU",
+        title: "Hanya Rindu - Andmesh",
         file: "/audio/ANDMESH-HANYA-RINDU.mp3",
         image: "https://telegra.ph/file/7c56a77256acd3f8a8ae2.jpg"
     },
     {
-        title: "TAK KAN HILANG - Budi Doremi",
+        title: "Tak Kan Hilang - Budi Doremi",
         file: "/audio/TAK-KAN-HILANG-Budi-Doremi.mp3",
         image: "https://telegra.ph/file/1aa0cf150ae3c664dd1bd.jpg"
     },
     {
-        title: "TULUS - Nala",
+        title: "Nala - Tulus",
         file: "/audio/TULUS-Nala.mp3",
         image: "https://telegra.ph/file/25d0c4c6687728c0fb225.jpg"
     },
     {
-        title: "Dudy Oris - Aku Yang Jatuh Cinta",
+        title: "Aku Yang Jatuh Cinta - Dudy Oris",
         file: "/audio/Dudy-Oris-Aku-Yang-Jatuh-Cinta.mp3",
         image: "https://telegra.ph/file/4bd164cf8c040c4a4becc.jpg"
     },
     {
-        title: "Lyodra - Tak Dianggap",
+        title: "Tak Dianggap - Lyodra",
         file: "/audio/Lyodra-tak-Dianggap.mp3",
         image: "https://telegra.ph/file/cac8e3202f6427b5d8e97.jpg"
     },
@@ -95,8 +95,63 @@ const songs = [
         image: "https://telegra.ph/file/cdc3e5c8b924d57a36060.jpg"
     },
     {
-        title: "Ziva - Cukup",
+        title: "Cukup - Ziva",
         file: "/audio/Ziva-Magnolya-Cukup.mp3",
         image: "https://telegra.ph/file/097c89f80f74b47dad392.jpg"
+    },
+    {
+        title: "Berisik - Dere",
+        file: "/audio/Berisik-Dere.mp3",
+        image: ""
+    },
+    {
+        title: "Asmalibrasi - Soegi Bornean",
+        file: "/audio/Soegi-Bornean-Asmalibrasi.mp3",
+        image: ""
+    },
+    {
+        title: "Ku Akan Menanti - Nikita Willy",
+        file: "/audio/KuAkan-Menanti-NikitaWilly.mp3",
+        image: ""
+    },
+    {
+        title: "Hapus Aku - Nidji",
+        file: "/audio/Hapus-Aku-Nidji.mp3",
+        image: ""
+    },
+    {
+        title: "Karena Kamu - Geisha",
+        file: "/audio/Gheisha-Karena-Kamu.mp3",
+        image: ""
+    },
+    {
+        title: "Terpikat Senyumu - Idgitaf",
+        file: "/audio/Idgitaf-Terpika-Senyumu.mp3",
+        image: ""
+    },
+    {
+        title: "Muak - Aruma",
+        file: "/audio/Muak-Aruma.mp3",
+        image: ""
+    },
+    {
+        title: "Diary Depresiku - Last Child",
+        file: "/audio/Diary-Depresiku-Last-Child.mp3",
+        image: ""
+    },
+    {
+        title: "Tak Pernah Ternilai - Last Child",
+        file: "/audio/Last-Child-Tak-pernah-ternilai.mp3",
+        image: ""
+    },
+    {
+        title: "Dendam - Last Child feat Sansan",
+        file: "/audio/Last-Child-feat-Sansan-Dendam.mp3",
+        image: ""
+    },
+    {
+        title: "Pedih - Last Child",
+        file: "/audio/Last-Child-Pedih.mp3",
+        image: ""
     }
 ];
