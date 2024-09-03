@@ -102,56 +102,56 @@ const songs = [
     {
         title: "Berisik - Dere",
         file: "/audio/Berisik-Dere.mp3",
-        image: ""
+        image: "https://telegra.ph/file/f7234cbd5ff2e815c3ebe.jpg"
     },
     {
         title: "Asmalibrasi - Soegi Bornean",
         file: "/audio/Soegi-Bornean-Asmalibrasi.mp3",
-        image: ""
+        image: "https://telegra.ph/file/966dccb1549fc858bcd6e.jpg"
     },
     {
         title: "Ku Akan Menanti - Nikita Willy",
         file: "/audio/KuAkan-Menanti-NikitaWilly.mp3",
-        image: ""
+        image: "https://telegra.ph/file/87dd835eec372010c9e7d.jpg"
     },
     {
         title: "Hapus Aku - Nidji",
         file: "/audio/Hapus-Aku-Nidji.mp3",
-        image: ""
+        image: "https://telegra.ph/file/5042ab83697eac160ba35.jpg"
     },
     {
         title: "Karena Kamu - Geisha",
         file: "/audio/Gheisha-Karena-Kamu.mp3",
-        image: ""
+        image: "https://telegra.ph/file/ea8a771ad5485c251ec39.jpg"
     },
     {
         title: "Terpikat Senyumu - Idgitaf",
         file: "/audio/Idgitaf-Terpika-Senyumu.mp3",
-        image: ""
+        image: "https://telegra.ph/file/ad23d806ee0a767d6bf72.jpg"
     },
     {
         title: "Muak - Aruma",
         file: "/audio/Muak-Aruma.mp3",
-        image: ""
+        image: "https://telegra.ph/file/0a7143d421b291321e1c9.jpg"
     },
     {
         title: "Diary Depresiku - Last Child",
         file: "/audio/Diary-Depresiku-Last-Child.mp3",
-        image: ""
+        image: "https://telegra.ph/file/ca076fbc055617a23d125.jpg"
     },
     {
         title: "Tak Pernah Ternilai - Last Child",
         file: "/audio/Last-Child-Tak-pernah-ternilai.mp3",
-        image: ""
+        image: "https://telegra.ph/file/1d95e1f41104b89738b17.jpg"
     },
     {
         title: "Dendam - Last Child feat Sansan",
         file: "/audio/Last-Child-feat-Sansan-Dendam.mp3",
-        image: ""
+        image: "https://telegra.ph/file/00288289f19304e418e7d.jpg"
     },
     {
         title: "Pedih - Last Child",
         file: "/audio/Last-Child-Pedih.mp3",
-        image: ""
+        image: "https://telegra.ph/file/1d95e1f41104b89738b17.jpg"
     }
 ];
