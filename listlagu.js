@@ -372,7 +372,7 @@
     },
     {
         "title": "Aku Tenang - Fourtwnty",
-        "file": "/audio/Aku_Tenang_Fourtwnty",
+        "file": "/audio/Aku_Tenang_Fourtwnty.mp3",
         "image": "https://qu.ax/vAKSQ.jpg",
         "description": "Ketenangan batin dalam terima kasih atas hidup yang sederhana.",
         "background": "https://qu.ax/vAKSQ.jpg"
