@@ -9,7 +9,7 @@
     <meta property="og:title" content="PlaylistKu">
     <meta property="og:description" content="Putar musik favorit Anda dengan mudah dan nyaman.">
     <meta property="og:image" content="https://files.catbox.moe/4cc7bn.jpg">
-    <meta property="og:url" content="https://playlistku.valbe.icu">
+    <meta property="og:url" content="https://playlistku.vercel.app">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="https://files.catbox.moe/4cc7bn.jpg" type="image/jpg">
     <title>PlaylistKu - Putar Musik Favorit Anda</title>
@@ -610,7 +610,7 @@
         // Fungsi untuk share lagu
         function shareSong() {
             const song = songs[currentSongIndex];
-            const shareUrl = `https://playlistku.valbe.icu/?song=${encodeURIComponent(song.title)}`;
+            const shareUrl = `https://playlistku.vercel.app/?song=${encodeURIComponent(song.title)}`;
             navigator.clipboard.writeText(shareUrl).then(() => {
                 showToast('Link lagu disalin ke clipboard!');
             });
