@@ -351,35 +351,35 @@
     },
     {
         "title": "Mata Air - Hindia, Natasha Udu, Kamga",
-        "file": "/audio/Mata_Air_Hindia_Natasha_Udu_Kamga.mp3",
+        "file": "/audio/Mata_Air_Hindia_&_Natasha_Udu_&_Kamga.mp3",
         "image": "https://qu.ax/MGcWD.jpg",
         "description": "Kolaborasi hangat yang membawa nuansa alami dan harapan.",
         "background": "https://qu.ax/MGcWD.jpg"
     },
     {
         "title": "Semua Orang Pernah Sakit Hati - Lomba Sihir",
-        "file": "/audio/Semua_Orang_Pernah_Sakit_Hati_Lomba_Sihir.mp3",
+        "file": "/audio/Semua_Orang_Pernah_Sakit_Hati_Lomba.mp3",
         "image": "https://qu.ax/ptHop.jpg",
         "description": "Lagu pop menyentuh hati, mengingatkan kita bahwa luka itu manusiawi.",
         "background": "https://qu.ax/ptHop.jpg"
     },
     {
         "title": "Dunia Tipu-Tipu - Yura Yunita",
-        "file": "/audio/Dunia_Tipu-Tipu_Yura_Yunita.mp3",
+        "file": "/audio/Dunia-Tipu-Tipu-Yura_Yunita.mp3",
         "image": "https://qu.ax/eirek.jpg",
         "description": "Kritik manis tentang realita palsu yang sering kita hadapi.",
         "background": "https://qu.ax/eirek.jpg"
     },
     {
         "title": "Aku Tenang - Fourtwnty",
-        "file": "/audio/Aku_Tenang_Fourtwnty.mp3",
+        "file": "/audio/Aku_Tenang_Fourtwnty",
         "image": "https://qu.ax/vAKSQ.jpg",
         "description": "Ketenangan batin dalam terima kasih atas hidup yang sederhana.",
         "background": "https://qu.ax/vAKSQ.jpg"
     },
     {
         "title": "Belum Tidur - Hindia, Sal Priadi",
-        "file": "/audio/Belum_Tidur_Hindia_Sal_Priadi.mp3",
+        "file": "/audio/Belum_Tidur_Hindia_&_Sal Priadi_.mp3",
         "image": "https://qu.ax/XRhBp.jpg",
         "description": "Suasana larut malam penuh renungan tentang cinta dan waktu.",
         "background": "https://qu.ax/XRhBp.jpg"
@@ -393,7 +393,7 @@
     },
     {
         "title": "Amin Paling Serius - Sal Priadi, Nadin Amizah",
-        "file": "/audio/Amin_Paling_Serius_Sal_Priadi_Nadin_Amizah.mp3",
+        "file": "/audio/Amin_Paling_Serius_Sal_Priadi_&_Nadin_Amizah.mp3",
         "image": "https://qu.ax/uOzZE.jpg",
         "description": "Doa cinta terdalam dan penuh harapan dari dua jiwa sensitif.",
         "background": "https://qu.ax/uOzZE.jpg"
