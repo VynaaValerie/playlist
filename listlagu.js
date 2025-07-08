@@ -42,13 +42,6 @@
         "background": "https://telegra.ph/file/aba254cf76a49fae21407.jpg"
     },
     {
-        "title": "Indah - Tak Sempurna",
-        "file": "/audio/INDAH-TAK-SEMPURNA.mp3",
-        "image": "https://telegra.ph/file/097c89f80f74b47dad392.jpg",
-        "description": "Lagu tentang cinta yang tak sempurna oleh Indah.",
-        "background": "https://telegra.ph/file/097c89f80f74b47dad392.jpg"
-    },
-    {
         "title": "Mendua - Astrid",
         "file": "/audio/Mendua-Astrid.mp3",
         "image": "https://telegra.ph/file/a10370b50e724643008f9.jpg",
@@ -231,13 +224,6 @@
         "background": "https://files.catbox.moe/nhu3kc.jpg"
     },
     {
-        "title": "Lyodra - Tak-Dianggap",
-        "file": "/audio/Lyodra-Tak-Dianggap.mp3",
-        "image": "https://files.catbox.moe/c7j2o1.jpg",
-        "description": "Lagu tentang perasaan tak dianggap oleh Lyodra.",
-        "background": "https://files.catbox.moe/c7j2o1.jpg"
-    },
-    {
         "title": "Tak Satu Cerita - Rizwan Ft Nabila",
         "file": "/audio/Tak-Satu-Cerita-Rizwan-Nabila.mp3",
         "image": "https://files.catbox.moe/sidcyg.jpg",
@@ -313,5 +299,103 @@
         "image": "https://files.catbox.moe/9hpvad.jpg",
         "description": "Lagu tentang keinginan untuk melupakan oleh Geisha.",
         "background": "https://files.catbox.moe/9hpvad.jpg"
+    },
+    {
+        "title": "Kau Rumahku - Raisa",
+        "file": "/audio/Kau_Rumahku_Raisa.mp3",
+        "image": "https://qu.ax/uQdLk.jpg",
+        "description": "Lagu romantis yang menggambarkan kenyamanan cinta sebagai rumah.",
+        "background": "https://qu.ax/uQdLk.jpg"
+    },
+    {
+        "title": "Usik - Feby Putri",
+        "file": "/audio/Usik_Feby_Putri.mp3",
+        "image": "https://qu.ax/ELbKk.jpg",
+        "description": "Curahan hati tentang kegelisahan dan pertanyaan dalam cinta.",
+        "background": "https://qu.ax/ELbKk.jpg"
+    },
+    {
+        "title": "Liar Angin - Feby Putri",
+        "file": "/audio/Liar_Angin_Feby_Putri.mp3",
+        "image": "https://qu.ax/viMlG.jpg",
+        "description": "Suara lembut Feby mengiringi perasaan yang berhembus seperti angin.",
+        "background": "https://qu.ax/viMlG.jpg"
+    },
+    {
+        "title": "Tuhan Sebut Sia-Sia - Siamigdala",
+        "file": "/audio/Tuhan_Sebut_Sia-Sia_Siamigdala.mp3",
+        "image": "https://qu.ax/vCGDV.jpg",
+        "description": "Perjalanan batin mencari makna yang tidak selalu dijawab dunia.",
+        "background": "https://qu.ax/vCGDV.jpg"
+    },
+    {
+        "title": "Untuk Apa Untuk Apa - Hindia",
+        "file": "/audio/Untuk_Apa_Untuk_Apa_Hindia.mp3",
+        "image": "https://qu.ax/WmtRv.jpg",
+        "description": "Pertanyaan eksistensial tentang tujuan hidup dan realita sehari-hari.",
+        "background": "https://qu.ax/WmtRv.jpg"
+    },
+    {
+        "title": "Besok Mungkin Kita Sampai - Hindia",
+        "file": "/audio/Besok_Mungkin_Kita_Sampai_Hindia.mp3",
+        "image": "https://qu.ax/vPNrT.jpg",
+        "description": "Lagu penuh harapan dalam perjalanan meraih tujuan bersama.",
+        "background": "https://qu.ax/vPNrT.jpg"
+    },
+    {
+        "title": "Sulung - Kunto Aji",
+        "file": "/audio/Sulung_Kunto_Aji.mp3",
+        "image": "https://qu.ax/sNuKP.jpg",
+        "description": "Refleksi seorang anak pertama tentang beban, luka, dan keluarga.",
+        "background": "https://qu.ax/sNuKP.jpg"
+    },
+    {
+        "title": "Mata Air - Hindia, Natasha Udu, Kamga",
+        "file": "/audio/Mata_Air_Hindia_Natasha_Udu_Kamga.mp3",
+        "image": "https://qu.ax/MGcWD.jpg",
+        "description": "Kolaborasi hangat yang membawa nuansa alami dan harapan.",
+        "background": "https://qu.ax/MGcWD.jpg"
+    },
+    {
+        "title": "Semua Orang Pernah Sakit Hati - Lomba Sihir",
+        "file": "/audio/Semua_Orang_Pernah_Sakit_Hati_Lomba_Sihir.mp3",
+        "image": "https://qu.ax/ptHop.jpg",
+        "description": "Lagu pop menyentuh hati, mengingatkan kita bahwa luka itu manusiawi.",
+        "background": "https://qu.ax/ptHop.jpg"
+    },
+    {
+        "title": "Dunia Tipu-Tipu - Yura Yunita",
+        "file": "/audio/Dunia_Tipu-Tipu_Yura_Yunita.mp3",
+        "image": "https://qu.ax/eirek.jpg",
+        "description": "Kritik manis tentang realita palsu yang sering kita hadapi.",
+        "background": "https://qu.ax/eirek.jpg"
+    },
+    {
+        "title": "Aku Tenang - Fourtwnty",
+        "file": "/audio/Aku_Tenang_Fourtwnty.mp3",
+        "image": "https://qu.ax/vAKSQ.jpg",
+        "description": "Ketenangan batin dalam terima kasih atas hidup yang sederhana.",
+        "background": "https://qu.ax/vAKSQ.jpg"
+    },
+    {
+        "title": "Belum Tidur - Hindia, Sal Priadi",
+        "file": "/audio/Belum_Tidur_Hindia_Sal_Priadi.mp3",
+        "image": "https://qu.ax/XRhBp.jpg",
+        "description": "Suasana larut malam penuh renungan tentang cinta dan waktu.",
+        "background": "https://qu.ax/XRhBp.jpg"
+    },
+    {
+        "title": "Kata Mereka ini Berlebihan - Bernadya",
+        "file": "/audio/Kata_Mereka_ini_Berlebihan_Bernadya.mp3",
+        "image": "https://qu.ax/XpBly.jpg",
+        "description": "Ekspresi emosi yang dianggap berlebihan tapi justru jujur.",
+        "background": "https://qu.ax/XpBly.jpg"
+    },
+    {
+        "title": "Amin Paling Serius - Sal Priadi, Nadin Amizah",
+        "file": "/audio/Amin_Paling_Serius_Sal_Priadi_Nadin_Amizah.mp3",
+        "image": "https://qu.ax/uOzZE.jpg",
+        "description": "Doa cinta terdalam dan penuh harapan dari dua jiwa sensitif.",
+        "background": "https://qu.ax/uOzZE.jpg"
     }
 ]
