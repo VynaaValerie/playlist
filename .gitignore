@@ -1,0 +1,32 @@
+# Replit
+.replit
+.config/
+.upm/
+.cache/
+.breakpoints
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Secrets
+.secrets.json
+.env
+
+# Node modules
+node_modules/
