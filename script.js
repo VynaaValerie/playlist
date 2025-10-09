@@ -1,4 +1,4 @@
-const API_URL = '';
+const API_URL = window.location.origin;
 
 let songs = [];
 let currentSongIndex = 0;
@@ -20,6 +20,7 @@ const myfavList = document.getElementById('myfavList');
 
 let lovedSongs = JSON.parse(localStorage.getItem('lovedSongs')) || [];
 
+// Load songs from listlagu.js
 fetch('/listlagu.js')
     .then(response => response.text())
     .then(data => {
@@ -27,6 +28,17 @@ fetch('/listlagu.js')
         renderSongList();
         if (songs.length > 0) {
             loadSong(0);
+        }
+    })
+    .catch(error => {
+        console.error('Error loading songs:', error);
+        // Fallback to direct initialization if fetch fails
+        if (typeof songListData !== 'undefined') {
+            songs = songListData;
+            renderSongList();
+            if (songs.length > 0) {
+                loadSong(0);
+            }
         }
     });
 

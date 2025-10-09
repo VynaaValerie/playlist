@@ -1,20 +1,21 @@
 {
-  "name": "workspace",
+  "name": "playlistku-music-player",
   "version": "1.0.0",
-  "description": "made by xwby ig: @xwbytech don't remove this tqto  Vynaa  Zaynn",
-  "main": "listlagu.js",
+  "description": "Modern web-based music player with live chat features",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["music", "player", "web", "audio", "chat"],
+  "author": "Xwby268",
+  "license": "MIT",
   "dependencies": {
-    "bad-words": "^4.0.0",
+    "express": "^4.18.2",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "googleapis": "^161.0.0"
+    "googleapis": "^126.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

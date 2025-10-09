@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const { google } = require('googleapis');
-const fs = require('fs');
 const path = require('path');
 
 const app = express();
@@ -25,16 +24,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('.'));
 
-const secrets = JSON.parse(fs.readFileSync('secrets.json', 'utf-8'));
+// Gunakan environment variables dari Vercel
+const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n') || '';
+const GOOGLE_CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL || '';
+const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID || '';
 
 const auth = new google.auth.JWT({
-    email: secrets.GOOGLE_CLIENT_EMAIL,
-    key: secrets.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    email: GOOGLE_CLIENT_EMAIL,
+    key: GOOGLE_PRIVATE_KEY,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
 const sheets = google.sheets({ version: 'v4', auth });
-const SPREADSHEET_ID = secrets.GOOGLE_SHEET_ID;
+const SPREADSHEET_ID = GOOGLE_SHEET_ID;
 
 const chatCache = new Map();
 const userLastMessage = new Map();
@@ -117,6 +119,7 @@ function validateMessage(message) {
     return { valid: true };
 }
 
+// API Routes
 app.get('/api/chat/messages', async (req, res) => {
     try {
         const messages = await getMessages();
@@ -163,12 +166,27 @@ app.post('/api/chat/send', async (req, res) => {
     }
 });
 
-const PORT = 5000;
+// Serve static files
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
-if (!process.env.VERCEL) {
-    app.listen(PORT, '0.0.0.0', () => {
-        console.log(`PlaylistKu server running on port ${PORT}`);
-    });
-}
+app.get('/style.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style.css'));
+});
+
+app.get('/script.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'script.js'));
+});
+
+app.get('/listlagu.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'listlagu.js'));
+});
+
+// Handle audio files
+app.get('/audio/:filename', (req, res) => {
+    const filename = req.params.filename;
+    res.sendFile(path.join(__dirname, 'audio', filename));
+});
 
 module.exports = app;
