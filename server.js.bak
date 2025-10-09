@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('.'));
 
-const secrets = JSON.parse(fs.readFileSync('secrets.json', 'utf-8'));
+const secrets = JSON.parse(fs.readFileSync('.secrets.json', 'utf-8'));
 
 const auth = new google.auth.JWT({
     email: secrets.GOOGLE_CLIENT_EMAIL,
