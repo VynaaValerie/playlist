@@ -1,4 +1,4 @@
-[
+const songs = [
     {
         "title": "Teramini - Ghea",
         "file": "/audio/Teramini-Ghea.mp3",
@@ -398,4 +398,4 @@
         "description": "Doa cinta terdalam dan penuh harapan dari dua jiwa sensitif.",
         "background": "https://qu.ax/uOzZE.jpg"
     }
-]
+];
