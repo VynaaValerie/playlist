@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const timerDisplay = document.getElementById('timerDisplay');
     const shareUrl = document.getElementById('shareUrl');
     const copyUrl = document.getElementById('copyUrl');
+    const chatToggle = document.getElementById('chatToggle');
+    const chatContainer = document.getElementById('chatContainer');
     
     // Buttons
     const playlistButtons = [document.getElementById('playlistButton'), document.getElementById('playlistButton2')];
@@ -41,12 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let timerMinutes = 0;
     let originalPlaylist = [...songs];
     let shuffledPlaylist = [];
+    let isChatVisible = true;
     
     // Initialize player
     function initPlayer() {
         loadSong(currentSongIndex);
         renderPlaylist();
         updateRepeatButton();
+        setupMediaSession();
         
         // Event listeners
         playButton.addEventListener('click', togglePlay);
@@ -85,6 +89,76 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Copy URL
         copyUrl.addEventListener('click', copyUrlToClipboard);
+        
+        // Chat toggle
+        chatToggle.addEventListener('click', toggleChat);
+    }
+    
+    // Setup Media Session API
+    function setupMediaSession() {
+        if ('mediaSession' in navigator) {
+            // Set media session metadata
+            updateMediaSession();
+            
+            // Set action handlers
+            navigator.mediaSession.setActionHandler('play', function() {
+                playSong();
+            });
+            
+            navigator.mediaSession.setActionHandler('pause', function() {
+                pauseSong();
+            });
+            
+            navigator.mediaSession.setActionHandler('previoustrack', function() {
+                prevSong();
+            });
+            
+            navigator.mediaSession.setActionHandler('nexttrack', function() {
+                nextSong();
+            });
+            
+            navigator.mediaSession.setActionHandler('seekbackward', function(details) {
+                const skipTime = details.seekOffset || 10;
+                audioPlayer.currentTime = Math.max(audioPlayer.currentTime - skipTime, 0);
+            });
+            
+            navigator.mediaSession.setActionHandler('seekforward', function(details) {
+                const skipTime = details.seekOffset || 10;
+                audioPlayer.currentTime = Math.min(audioPlayer.currentTime + skipTime, audioPlayer.duration);
+            });
+            
+            navigator.mediaSession.setActionHandler('seekto', function(details) {
+                if (details.fastSeek && 'fastSeek' in audioPlayer) {
+                    audioPlayer.fastSeek(details.seekTime);
+                } else {
+                    audioPlayer.currentTime = details.seekTime;
+                }
+            });
+        }
+    }
+    
+    // Update Media Session metadata
+    function updateMediaSession() {
+        if ('mediaSession' in navigator) {
+            const song = songs[currentSongIndex];
+            
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: song.title,
+                artist: song.description,
+                album: 'PlayListku',
+                artwork: [
+                    { src: song.image, sizes: '96x96', type: 'image/jpeg' },
+                    { src: song.image, sizes: '128x128', type: 'image/jpeg' },
+                    { src: song.image, sizes: '192x192', type: 'image/jpeg' },
+                    { src: song.image, sizes: '256x256', type: 'image/jpeg' },
+                    { src: song.image, sizes: '384x384', type: 'image/jpeg' },
+                    { src: song.image, sizes: '512x512', type: 'image/jpeg' }
+                ]
+            });
+            
+            // Update playback state
+            navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+        }
     }
     
     // Load song
@@ -95,10 +169,13 @@ document.addEventListener('DOMContentLoaded', function() {
         artistName.textContent = song.description;
         coverImage.src = song.image;
         
-        // Update share URL - FIXED: Use current page URL with track parameter
+        // Update share URL
         const currentUrl = new URL(window.location.href);
         currentUrl.searchParams.set('track', encodeURIComponent(song.title));
         shareUrl.textContent = currentUrl.toString();
+        
+        // Update Media Session
+        updateMediaSession();
         
         // Update playlist active state
         updatePlaylistActiveState();
@@ -119,6 +196,11 @@ document.addEventListener('DOMContentLoaded', function() {
         isPlaying = true;
         playButton.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
         playButton.setAttribute('aria-label', 'Pause');
+        
+        // Update Media Session
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.playbackState = 'playing';
+        }
     }
     
     // Pause song
@@ -127,6 +209,11 @@ document.addEventListener('DOMContentLoaded', function() {
         isPlaying = false;
         playButton.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
         playButton.setAttribute('aria-label', 'Play');
+        
+        // Update Media Session
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.playbackState = 'paused';
+        }
     }
     
     // Previous song
@@ -227,6 +314,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update time display
         currentTimeEl.textContent = formatTime(currentTime);
+        
+        // Update Media Session position state
+        if ('mediaSession' in navigator && !isNaN(duration)) {
+            navigator.mediaSession.setPositionState({
+                duration: duration,
+                playbackRate: audioPlayer.playbackRate,
+                position: currentTime
+            });
+        }
     }
     
     // Update duration
@@ -321,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function openShareModal() {
         shareModal.style.display = 'flex';
         
-        // Generate share URL for current song - FIXED: Use proper URL construction
+        // Generate share URL for current song
         const currentUrl = new URL(window.location.href);
         currentUrl.searchParams.set('track', encodeURIComponent(songs[currentSongIndex].title));
         shareUrl.textContent = currentUrl.toString();
@@ -392,7 +488,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Check URL parameters for track - FIXED: Improved URL parameter handling
+    // Toggle chat visibility
+    function toggleChat() {
+        isChatVisible = !isChatVisible;
+        if (isChatVisible) {
+            chatContainer.style.display = 'flex';
+            chatToggle.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>';
+        } else {
+            chatContainer.style.display = 'none';
+            chatToggle.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>';
+        }
+    }
+    
+    // Check URL parameters for track
     function checkUrlParams() {
         const urlParams = new URLSearchParams(window.location.search);
         const trackParam = urlParams.get('track');
