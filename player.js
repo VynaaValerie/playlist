@@ -95,8 +95,10 @@ document.addEventListener('DOMContentLoaded', function() {
         artistName.textContent = song.description;
         coverImage.src = song.image;
         
-        // Update share URL
-        shareUrl.textContent = `${window.location.origin}/judul-lagunya?track=${encodeURIComponent(song.title)}`;
+        // Update share URL - FIXED: Use current page URL with track parameter
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('track', encodeURIComponent(song.title));
+        shareUrl.textContent = currentUrl.toString();
         
         // Update playlist active state
         updatePlaylistActiveState();
@@ -272,7 +274,9 @@ document.addEventListener('DOMContentLoaded', function() {
             item.addEventListener('click', () => {
                 currentSongIndex = index;
                 loadSong(currentSongIndex);
-                playSong();
+                if (isPlaying) {
+                    playSong();
+                }
                 closePlaylistModal();
             });
             
@@ -295,6 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open playlist modal
     function openPlaylistModal() {
         playlistModal.style.display = 'flex';
+        renderPlaylist();
     }
     
     // Close playlist modal
@@ -315,6 +320,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open share modal
     function openShareModal() {
         shareModal.style.display = 'flex';
+        
+        // Generate share URL for current song - FIXED: Use proper URL construction
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('track', encodeURIComponent(songs[currentSongIndex].title));
+        shareUrl.textContent = currentUrl.toString();
     }
     
     // Close share modal
@@ -326,39 +336,41 @@ document.addEventListener('DOMContentLoaded', function() {
     function cancelTimerFunc() {
         clearInterval(timerInterval);
         timerMinutes = 0;
-        updateTimerDisplay();
+        timerDisplay.textContent = 'Off';
+        timerOptions.forEach(opt => opt.classList.remove('active'));
     }
     
     // Start timer
     function startTimerFunc() {
         if (timerMinutes > 0) {
-            updateTimerDisplay();
+            timerDisplay.textContent = `${timerMinutes}:00`;
             
-            clearInterval(timerInterval);
+            let seconds = timerMinutes * 60;
+            
             timerInterval = setInterval(() => {
-                timerMinutes--;
-                updateTimerDisplay();
+                seconds--;
                 
-                if (timerMinutes <= 0) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                
+                if (seconds <= 0) {
                     clearInterval(timerInterval);
                     pauseSong();
-                    closeTimerModal();
+                    timerDisplay.textContent = 'Off';
+                    timerMinutes = 0;
+                } else {
+                    timerDisplay.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
                 }
-            }, 60000); // Update every minute
+            }, 1000);
+            
+            closeTimerModal();
         }
     }
     
     // Update timer display
     function updateTimerDisplay() {
         if (timerMinutes > 0) {
-            const hours = Math.floor(timerMinutes / 60);
-            const minutes = timerMinutes % 60;
-            
-            if (hours > 0) {
-                timerDisplay.textContent = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
-            } else {
-                timerDisplay.textContent = `${minutes} minutes`;
-            }
+            timerDisplay.textContent = `${timerMinutes}:00`;
         } else {
             timerDisplay.textContent = 'Off';
         }
@@ -367,27 +379,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // Copy URL to clipboard
     function copyUrlToClipboard() {
         const url = shareUrl.textContent;
+        
         navigator.clipboard.writeText(url).then(() => {
+            const originalText = copyUrl.textContent;
             copyUrl.textContent = 'Copied!';
+            
             setTimeout(() => {
-                copyUrl.textContent = 'Copy Link';
+                copyUrl.textContent = originalText;
             }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
         });
     }
     
-    // Check URL parameters for auto-play
+    // Check URL parameters for track - FIXED: Improved URL parameter handling
     function checkUrlParams() {
         const urlParams = new URLSearchParams(window.location.search);
         const trackParam = urlParams.get('track');
         
         if (trackParam) {
             const decodedTrack = decodeURIComponent(trackParam);
-            const songIndex = songs.findIndex(song => song.title === decodedTrack);
+            const trackIndex = songs.findIndex(song => 
+                song.title.toLowerCase() === decodedTrack.toLowerCase()
+            );
             
-            if (songIndex !== -1) {
-                currentSongIndex = songIndex;
+            if (trackIndex !== -1) {
+                currentSongIndex = trackIndex;
                 loadSong(currentSongIndex);
-                playSong();
+                
+                // Auto-play if user came from a share link
+                if (urlParams.get('autoplay') === 'true') {
+                    playSong();
+                }
             }
         }
     }
@@ -395,6 +418,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the player
     initPlayer();
     
-    // Check for URL parameters
+    // Check URL parameters on load
     checkUrlParams();
+    
+    // Close modals when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === playlistModal) {
+            closePlaylistModal();
+        }
+        if (e.target === timerModal) {
+            closeTimerModal();
+        }
+        if (e.target === shareModal) {
+            closeShareModal();
+        }
+    });
 });
