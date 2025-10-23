@@ -172,6 +172,10 @@
             color: #19d36e;
         }
 
+        .repeat-btn {
+            opacity: 0.7;
+        }
+
         .prev-btn, .next-btn {
             opacity: 0.5;
         }
@@ -305,97 +309,304 @@
             font-size: 14px;
             color: #bfbfbf;
         }
+        
+        /* Timer modal */
+        .timer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .timer-content {
+            background: #2b2b2b;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .timer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .timer-header h2 {
+            font-size: 18px;
+        }
+        
+        .timer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .timer-option {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .timer-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .timer-option.active {
+            background: #19d36e;
+            color: black;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .timer-btn-control {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .timer-btn-control:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .timer-btn-control.start {
+            background: #19d36e;
+            color: black;
+        }
+        
+        .timer-display {
+            font-size: 24px;
+            margin: 15px 0;
+        }
+        
+        /* Share modal */
+        .share-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .share-content {
+            background: #2b2b2b;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .share-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .share-header h2 {
+            font-size: 18px;
+        }
+        
+        .share-url {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            width: 100%;
+            padding: 12px;
+            background: #19d36e;
+            border: none;
+            border-radius: 8px;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: #16b75f;
+        }
+        
+        /* Desktop layout */
+        @media (min-width: 768px) {
+            .player {
+                max-width: 800px;
+                display: flex;
+                gap: 40px;
+                align-items: center;
+            }
+            
+            .player-left {
+                flex: 1;
+                max-width: 375px;
+            }
+            
+            .player-right {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .cover-art {
+                width: 320px;
+                height: 320px;
+            }
+            
+            .track-info {
+                margin-bottom: 40px;
+            }
+            
+            .track-title {
+                font-size: 28px;
+            }
+            
+            .artist-name {
+                font-size: 18px;
+            }
+            
+            .progress-container {
+                margin-bottom: 50px;
+            }
+            
+            .controls {
+                margin-bottom: 50px;
+            }
+        }
+        
+        /* Repeat states */
+        .repeat-btn.repeat-one {
+            color: #19d36e;
+        }
+        
+        .repeat-btn.repeat-all {
+            color: #19d36e;
+        }
     </style>
 </head>
 <body>
     <div class="player">
-        <div class="header">
-            <button class="back-btn" aria-label="Back">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-                </svg>
-            </button>
-            <div class="playlist-info">
-                <div class="playlist-subtitle">MEMAINKAN DARI PLAYLIST</div>
-                <div class="playlist-title">
-                    <svg class="small-icon" viewBox="0 0 24 24">
-                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        <div class="player-left">
+            <div class="header">
+                <button class="back-btn" aria-label="Back">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                     </svg>
-                    Playlist dj angkot
+                </button>
+                <div class="playlist-info">
+                    <div class="playlist-subtitle">MEMAINKAN DARI PLAYLIST</div>
+                    <div class="playlist-title">
+                        <svg class="small-icon" viewBox="0 0 24 24">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                        Playlist dj angkot
+                    </div>
+                </div>
+                <button class="menu-btn" aria-label="Menu" id="playlistButton">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="cover-art">
+                <img src="" alt="Album Cover" id="coverImage">
+            </div>
+        </div>
+
+        <div class="player-right">
+            <div class="track-info">
+                <div class="track-title" id="trackTitle">Pilih lagu dari playlist</div>
+                <div class="artist-name" id="artistName">-</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress" id="progress">
+                        <div class="progress-handle"></div>
+                    </div>
+                </div>
+                <div class="time-info">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
                 </div>
             </div>
-            <button class="menu-btn" aria-label="Menu" id="playlistButton">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-                </svg>
-            </button>
-        </div>
 
-        <div class="cover-art">
-            <img src="" alt="Album Cover" id="coverImage">
-        </div>
-
-        <div class="track-info">
-            <div class="track-title" id="trackTitle">Pilih lagu dari playlist</div>
-            <div class="artist-name" id="artistName">-</div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar">
-                <div class="progress" id="progress">
-                    <div class="progress-handle"></div>
-                </div>
+            <div class="controls">
+                <button class="control-btn repeat-btn" aria-label="Repeat" id="repeatButton">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>
+                    </svg>
+                </button>
+                <button class="control-btn prev-btn" aria-label="Previous" id="prevButton">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                    </svg>
+                </button>
+                <button class="control-btn play-btn" id="playButton" aria-label="Play">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </button>
+                <button class="control-btn next-btn" aria-label="Next" id="nextButton">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                    </svg>
+                </button>
+                <button class="control-btn shuffle-btn" aria-label="Shuffle" id="shuffleButton">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
+                    </svg>
+                </button>
             </div>
-            <div class="time-info">
-                <span id="currentTime">0:00</span>
-                <span id="duration">0:00</span>
+
+            <div class="bottom-controls">
+                <button class="bottom-btn timer-btn" aria-label="Timer" id="timerButton">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                    </svg>
+                </button>
+                <button class="bottom-btn" aria-label="Share" id="shareButton">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                    </svg>
+                </button>
+                <button class="bottom-btn" aria-label="Playlist" id="playlistButton2">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M4 10h12v2H4zm0-4h12v2H4zm0-4h12v2H4zm0 12h12v2H4zm0 4h12v2H4zm16 0h-4v-2h4v2zm0-16h-4v2h4V6zm0 4h-4v2h4v-2zm0 4h-4v2h4v-2z"/>
+                    </svg>
+                </button>
             </div>
-        </div>
-
-        <div class="controls">
-            <button class="control-btn shuffle-btn" aria-label="Shuffle" id="shuffleButton">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
-                </svg>
-            </button>
-            <button class="control-btn prev-btn" aria-label="Previous" id="prevButton">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                </svg>
-            </button>
-            <button class="control-btn play-btn" id="playButton" aria-label="Play">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
-            </button>
-            <button class="control-btn next-btn" aria-label="Next" id="nextButton">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-                </svg>
-            </button>
-            <button class="control-btn timer-btn" aria-label="Timer">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
-                </svg>
-            </button>
-        </div>
-
-        <div class="bottom-controls">
-            <button class="bottom-btn" aria-label="Connect to device">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55.45-1-1-1zm-1 9h-4v-7h4v7z"/>
-                </svg>
-            </button>
-            <button class="bottom-btn" aria-label="Share">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
-                </svg>
-            </button>
-            <button class="bottom-btn" aria-label="Playlist" id="playlistButton2">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M4 10h12v2H4zm0-4h12v2H4zm0-4h12v2H4zm0 12h12v2H4zm0 4h12v2H4zm16 0h-4v-2h4v2zm0-16h-4v2h4V6zm0 4h-4v2h4v-2zm0 4h-4v2h4v-2z"/>
-                </svg>
-            </button>
         </div>
     </div>
 
@@ -411,6 +622,49 @@
                 </button>
             </div>
             <div id="playlistItems"></div>
+        </div>
+    </div>
+
+    <!-- Timer Modal -->
+    <div class="timer-modal" id="timerModal">
+        <div class="timer-content">
+            <div class="timer-header">
+                <h2>Sleep Timer</h2>
+                <button class="close-btn" id="closeTimer">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="timer-display" id="timerDisplay">Off</div>
+            <div class="timer-options">
+                <div class="timer-option" data-minutes="5">5 minutes</div>
+                <div class="timer-option" data-minutes="15">15 minutes</div>
+                <div class="timer-option" data-minutes="30">30 minutes</div>
+                <div class="timer-option" data-minutes="60">1 hour</div>
+                <div class="timer-option" data-minutes="90">1.5 hours</div>
+            </div>
+            <div class="timer-controls">
+                <button class="timer-btn-control" id="cancelTimer">Cancel</button>
+                <button class="timer-btn-control start" id="startTimer">Start</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-content">
+            <div class="share-header">
+                <h2>Share Song</h2>
+                <button class="close-btn" id="closeShare">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <p>Share this song with your friends:</p>
+            <div class="share-url" id="shareUrl"></div>
+            <button class="copy-btn" id="copyUrl">Copy Link</button>
         </div>
     </div>
 

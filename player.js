@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Elemen DOM
+    // Elements
     const audioPlayer = document.getElementById('audioPlayer');
     const playButton = document.getElementById('playButton');
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
     const shuffleButton = document.getElementById('shuffleButton');
+    const repeatButton = document.getElementById('repeatButton');
     const progressBar = document.getElementById('progressBar');
     const progress = document.getElementById('progress');
     const currentTimeEl = document.getElementById('currentTime');
@@ -12,80 +13,95 @@ document.addEventListener('DOMContentLoaded', function() {
     const trackTitle = document.getElementById('trackTitle');
     const artistName = document.getElementById('artistName');
     const coverImage = document.getElementById('coverImage');
-    const playlistButton = document.getElementById('playlistButton');
-    const playlistButton2 = document.getElementById('playlistButton2');
     const playlistModal = document.getElementById('playlistModal');
-    const closePlaylist = document.getElementById('closePlaylist');
+    const timerModal = document.getElementById('timerModal');
+    const shareModal = document.getElementById('shareModal');
     const playlistItems = document.getElementById('playlistItems');
-
-    // Variabel state
-    let isPlaying = false;
-    let isDragging = false;
+    const timerDisplay = document.getElementById('timerDisplay');
+    const shareUrl = document.getElementById('shareUrl');
+    const copyUrl = document.getElementById('copyUrl');
+    
+    // Buttons
+    const playlistButtons = [document.getElementById('playlistButton'), document.getElementById('playlistButton2')];
+    const timerButton = document.getElementById('timerButton');
+    const shareButton = document.getElementById('shareButton');
+    const closePlaylist = document.getElementById('closePlaylist');
+    const closeTimer = document.getElementById('closeTimer');
+    const closeShare = document.getElementById('closeShare');
+    const cancelTimer = document.getElementById('cancelTimer');
+    const startTimer = document.getElementById('startTimer');
+    const timerOptions = document.querySelectorAll('.timer-option');
+    
+    // Player state
     let currentSongIndex = 0;
+    let isPlaying = false;
     let isShuffled = false;
+    let repeatMode = 'none'; // 'none', 'all', 'one'
+    let timerInterval = null;
+    let timerMinutes = 0;
     let originalPlaylist = [...songs];
     let shuffledPlaylist = [];
-
-    // Inisialisasi
-    function init() {
+    
+    // Initialize player
+    function initPlayer() {
         loadSong(currentSongIndex);
         renderPlaylist();
+        updateRepeatButton();
         
         // Event listeners
         playButton.addEventListener('click', togglePlay);
         prevButton.addEventListener('click', prevSong);
         nextButton.addEventListener('click', nextSong);
         shuffleButton.addEventListener('click', toggleShuffle);
+        repeatButton.addEventListener('click', toggleRepeat);
         
-        // Progress bar events
-        progressBar.addEventListener('mousedown', startDrag);
-        progressBar.addEventListener('touchstart', startDrag);
-        
-        // Playlist modal events
-        playlistButton.addEventListener('click', openPlaylist);
-        playlistButton2.addEventListener('click', openPlaylist);
-        closePlaylist.addEventListener('click', closePlaylistModal);
+        // Progress bar
+        progressBar.addEventListener('click', setProgress);
         
         // Audio events
         audioPlayer.addEventListener('loadedmetadata', updateDuration);
         audioPlayer.addEventListener('timeupdate', updateProgress);
-        audioPlayer.addEventListener('ended', nextSong);
+        audioPlayer.addEventListener('ended', handleSongEnd);
         
-        // Keyboard support
-        document.addEventListener('keydown', handleKeydown);
+        // Modal buttons
+        playlistButtons.forEach(btn => btn.addEventListener('click', openPlaylistModal));
+        timerButton.addEventListener('click', openTimerModal);
+        shareButton.addEventListener('click', openShareModal);
+        closePlaylist.addEventListener('click', closePlaylistModal);
+        closeTimer.addEventListener('click', closeTimerModal);
+        closeShare.addEventListener('click', closeShareModal);
+        cancelTimer.addEventListener('click', cancelTimerFunc);
+        startTimer.addEventListener('click', startTimerFunc);
         
-        // Enable buttons
-        prevButton.disabled = false;
-        nextButton.disabled = false;
+        // Timer options
+        timerOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                timerOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                timerMinutes = parseInt(this.getAttribute('data-minutes'));
+                updateTimerDisplay();
+            });
+        });
+        
+        // Copy URL
+        copyUrl.addEventListener('click', copyUrlToClipboard);
     }
-
+    
     // Load song
     function loadSong(index) {
         const song = songs[index];
         audioPlayer.src = song.file;
         trackTitle.textContent = song.title;
-        
-        // Extract artist name from title (assuming format "Song - Artist")
-        const titleParts = song.title.split(' - ');
-        if (titleParts.length > 1) {
-            artistName.textContent = titleParts[1];
-        } else {
-            artistName.textContent = "Unknown Artist";
-        }
-        
+        artistName.textContent = song.description;
         coverImage.src = song.image;
-        coverImage.alt = `${song.title} Cover`;
         
-        // Reset progress
-        progress.style.width = '0%';
-        currentTimeEl.textContent = '0:00';
+        // Update share URL
+        shareUrl.textContent = `${window.location.origin}/judul-lagunya?track=${encodeURIComponent(song.title)}`;
         
-        // Auto play if already playing
-        if (isPlaying) {
-            audioPlayer.play();
-        }
+        // Update playlist active state
+        updatePlaylistActiveState();
     }
-
+    
     // Toggle play/pause
     function togglePlay() {
         if (isPlaying) {
@@ -93,48 +109,48 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             playSong();
         }
-        
-        // Animation
-        playButton.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            playButton.style.transform = 'scale(1)';
-        }, 150);
     }
-
+    
+    // Play song
     function playSong() {
-        isPlaying = true;
         audioPlayer.play();
-        playButton.innerHTML = `<svg class="icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+        isPlaying = true;
+        playButton.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
         playButton.setAttribute('aria-label', 'Pause');
     }
-
+    
+    // Pause song
     function pauseSong() {
-        isPlaying = false;
         audioPlayer.pause();
-        playButton.innerHTML = `<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+        isPlaying = false;
+        playButton.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
         playButton.setAttribute('aria-label', 'Play');
     }
-
+    
     // Previous song
     function prevSong() {
-        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        currentSongIndex--;
+        if (currentSongIndex < 0) {
+            currentSongIndex = songs.length - 1;
+        }
         loadSong(currentSongIndex);
         if (isPlaying) {
             playSong();
         }
-        updateActivePlaylistItem();
     }
-
+    
     // Next song
     function nextSong() {
-        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        currentSongIndex++;
+        if (currentSongIndex >= songs.length) {
+            currentSongIndex = 0;
+        }
         loadSong(currentSongIndex);
         if (isPlaying) {
             playSong();
         }
-        updateActivePlaylistItem();
     }
-
+    
     // Toggle shuffle
     function toggleShuffle() {
         isShuffled = !isShuffled;
@@ -147,39 +163,85 @@ document.addEventListener('DOMContentLoaded', function() {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffledPlaylist[i], shuffledPlaylist[j]] = [shuffledPlaylist[j], shuffledPlaylist[i]];
             }
-            // Update current index in shuffled playlist
+            // Find current song in shuffled playlist
             const currentSong = songs[currentSongIndex];
-            currentSongIndex = shuffledPlaylist.findIndex(song => song.title === currentSong.title);
-            songs.splice(0, songs.length, ...shuffledPlaylist);
+            const newIndex = shuffledPlaylist.findIndex(song => song.title === currentSong.title);
+            if (newIndex !== -1) {
+                // Move current song to the beginning
+                shuffledPlaylist.splice(newIndex, 1);
+                shuffledPlaylist.unshift(currentSong);
+                currentSongIndex = 0;
+            }
         } else {
             shuffleButton.style.color = 'white';
             // Restore original order
             const currentSong = songs[currentSongIndex];
-            songs.splice(0, songs.length, ...originalPlaylist);
-            currentSongIndex = songs.findIndex(song => song.title === currentSong.title);
+            currentSongIndex = originalPlaylist.findIndex(song => song.title === currentSong.title);
         }
-        
-        renderPlaylist();
-        updateActivePlaylistItem();
     }
-
+    
+    // Toggle repeat
+    function toggleRepeat() {
+        if (repeatMode === 'none') {
+            repeatMode = 'all';
+        } else if (repeatMode === 'all') {
+            repeatMode = 'one';
+        } else {
+            repeatMode = 'none';
+        }
+        updateRepeatButton();
+    }
+    
+    // Update repeat button appearance
+    function updateRepeatButton() {
+        repeatButton.classList.remove('repeat-one', 'repeat-all');
+        
+        if (repeatMode === 'all') {
+            repeatButton.classList.add('repeat-all');
+            repeatButton.style.color = '#19d36e';
+        } else if (repeatMode === 'one') {
+            repeatButton.classList.add('repeat-one');
+            repeatButton.style.color = '#19d36e';
+        } else {
+            repeatButton.style.color = 'white';
+        }
+    }
+    
+    // Handle song end
+    function handleSongEnd() {
+        if (repeatMode === 'one') {
+            audioPlayer.currentTime = 0;
+            audioPlayer.play();
+        } else {
+            nextSong();
+        }
+    }
+    
     // Update progress bar
     function updateProgress() {
-        if (isDragging) return;
-        
         const { currentTime, duration } = audioPlayer;
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
         
+        // Update time display
         currentTimeEl.textContent = formatTime(currentTime);
     }
-
+    
     // Update duration
     function updateDuration() {
         durationEl.textContent = formatTime(audioPlayer.duration);
     }
-
-    // Format time (seconds to mm:ss)
+    
+    // Set progress on click
+    function setProgress(e) {
+        const width = this.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audioPlayer.duration;
+        
+        audioPlayer.currentTime = (clickX / width) * duration;
+    }
+    
+    // Format time (seconds to MM:SS)
     function formatTime(seconds) {
         if (isNaN(seconds)) return '0:00';
         
@@ -187,57 +249,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const secs = Math.floor(seconds % 60);
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
-
-    // Progress bar dragging
-    function startDrag(e) {
-        isDragging = true;
-        updateProgressPosition(e);
-        document.addEventListener('mousemove', updateProgressPosition);
-        document.addEventListener('touchmove', updateProgressPosition);
-        document.addEventListener('mouseup', stopDrag);
-        document.addEventListener('touchend', stopDrag);
-    }
-
-    function stopDrag() {
-        isDragging = false;
-        document.removeEventListener('mousemove', updateProgressPosition);
-        document.removeEventListener('touchmove', updateProgressPosition);
-        document.removeEventListener('mouseup', stopDrag);
-        document.removeEventListener('touchend', stopDrag);
-    }
-
-    function updateProgressPosition(e) {
-        if (!isDragging) return;
-        
-        const rect = progressBar.getBoundingClientRect();
-        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-        let percentage = (clientX - rect.left) / rect.width;
-        percentage = Math.max(0, Math.min(1, percentage));
-        
-        progress.style.width = `${percentage * 100}%`;
-        
-        // Update audio time
-        if (audioPlayer.duration) {
-            audioPlayer.currentTime = percentage * audioPlayer.duration;
-        }
-    }
-
-    // Playlist modal
-    function openPlaylist() {
-        playlistModal.style.display = 'flex';
-    }
-
-    function closePlaylistModal() {
-        playlistModal.style.display = 'none';
-    }
-
-    // Render playlist items
+    
+    // Render playlist
     function renderPlaylist() {
         playlistItems.innerHTML = '';
         
         songs.forEach((song, index) => {
             const item = document.createElement('div');
-            item.className = `playlist-item ${index === currentSongIndex ? 'active' : ''}`;
+            item.className = 'playlist-item';
+            if (index === currentSongIndex) {
+                item.classList.add('active');
+            }
+            
             item.innerHTML = `
                 <img src="${song.image}" alt="${song.title}">
                 <div class="playlist-item-info">
@@ -249,19 +272,16 @@ document.addEventListener('DOMContentLoaded', function() {
             item.addEventListener('click', () => {
                 currentSongIndex = index;
                 loadSong(currentSongIndex);
-                if (isPlaying) {
-                    playSong();
-                }
-                updateActivePlaylistItem();
+                playSong();
                 closePlaylistModal();
             });
             
             playlistItems.appendChild(item);
         });
     }
-
-    // Update active playlist item
-    function updateActivePlaylistItem() {
+    
+    // Update playlist active state
+    function updatePlaylistActiveState() {
         const items = document.querySelectorAll('.playlist-item');
         items.forEach((item, index) => {
             if (index === currentSongIndex) {
@@ -271,33 +291,110 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Keyboard support
-    function handleKeydown(e) {
-        if (e.code === 'Space') {
-            e.preventDefault();
-            togglePlay();
-        } else if (e.code === 'ArrowLeft') {
-            e.preventDefault();
-            // Seek backward
-            if (audioPlayer.duration) {
-                audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
-            }
-        } else if (e.code === 'ArrowRight') {
-            e.preventDefault();
-            // Seek forward
-            if (audioPlayer.duration) {
-                audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 5);
-            }
-        } else if (e.code === 'ArrowUp') {
-            e.preventDefault();
-            prevSong();
-        } else if (e.code === 'ArrowDown') {
-            e.preventDefault();
-            nextSong();
+    
+    // Open playlist modal
+    function openPlaylistModal() {
+        playlistModal.style.display = 'flex';
+    }
+    
+    // Close playlist modal
+    function closePlaylistModal() {
+        playlistModal.style.display = 'none';
+    }
+    
+    // Open timer modal
+    function openTimerModal() {
+        timerModal.style.display = 'flex';
+    }
+    
+    // Close timer modal
+    function closeTimerModal() {
+        timerModal.style.display = 'none';
+    }
+    
+    // Open share modal
+    function openShareModal() {
+        shareModal.style.display = 'flex';
+    }
+    
+    // Close share modal
+    function closeShareModal() {
+        shareModal.style.display = 'none';
+    }
+    
+    // Cancel timer
+    function cancelTimerFunc() {
+        clearInterval(timerInterval);
+        timerMinutes = 0;
+        updateTimerDisplay();
+    }
+    
+    // Start timer
+    function startTimerFunc() {
+        if (timerMinutes > 0) {
+            updateTimerDisplay();
+            
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timerMinutes--;
+                updateTimerDisplay();
+                
+                if (timerMinutes <= 0) {
+                    clearInterval(timerInterval);
+                    pauseSong();
+                    closeTimerModal();
+                }
+            }, 60000); // Update every minute
         }
     }
-
+    
+    // Update timer display
+    function updateTimerDisplay() {
+        if (timerMinutes > 0) {
+            const hours = Math.floor(timerMinutes / 60);
+            const minutes = timerMinutes % 60;
+            
+            if (hours > 0) {
+                timerDisplay.textContent = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+            } else {
+                timerDisplay.textContent = `${minutes} minutes`;
+            }
+        } else {
+            timerDisplay.textContent = 'Off';
+        }
+    }
+    
+    // Copy URL to clipboard
+    function copyUrlToClipboard() {
+        const url = shareUrl.textContent;
+        navigator.clipboard.writeText(url).then(() => {
+            copyUrl.textContent = 'Copied!';
+            setTimeout(() => {
+                copyUrl.textContent = 'Copy Link';
+            }, 2000);
+        });
+    }
+    
+    // Check URL parameters for auto-play
+    function checkUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const trackParam = urlParams.get('track');
+        
+        if (trackParam) {
+            const decodedTrack = decodeURIComponent(trackParam);
+            const songIndex = songs.findIndex(song => song.title === decodedTrack);
+            
+            if (songIndex !== -1) {
+                currentSongIndex = songIndex;
+                loadSong(currentSongIndex);
+                playSong();
+            }
+        }
+    }
+    
     // Initialize the player
-    init();
+    initPlayer();
+    
+    // Check for URL parameters
+    checkUrlParams();
 });
